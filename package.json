@@ -1,24 +1,22 @@
 {
-	"name": "@dankolz/picture-ckeditor-plugin",
+	"name": "@dankolz/template-ckeditor-plugin",
 	"version": "1.0.0",
 	"description": "",
 	"main": "server-js/integrate.js",
-	"scripts": {
-	},
+	"scripts": {},
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
-	"dependencies": {},
-	"devDependencies": {
-	},
 	"browserify": {
 		"transform": [
 			"tripartite/browserify-transform"
 		]
 	},
 	"files": [
-		"/client-js/index.js",
-		"/less/components.less",
+		"/server-js/integrate.js",
 		"/public"
-	]
+	],
+	"peerDependencies": {
+		"webhandle-page-editor": "^1.0.33"
+	}
 }

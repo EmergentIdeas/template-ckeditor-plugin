@@ -1,6 +1,6 @@
-CKEDITOR.dialog.add('flex-picture', function (editor) {
+CKEDITOR.dialog.add('template-replacement', function (editor) {
 	return {
-		title: 'Edit Picture',
+		title: 'Edit template',
 		minWidth: 700,
 		minHeight: 100,
 		contents: [
@@ -8,6 +8,17 @@ CKEDITOR.dialog.add('flex-picture', function (editor) {
 				id: 'info',
 				label: 'Basics',
 				elements: [
+					{
+						id: 'templatecontent',
+						type: 'text',
+						label: 'Template content',
+						setup: function (widget) {
+							this.setValue( widget.data.templatecontent);
+						},
+						commit: function (widget) {
+							widget.setData( 'templatecontent', this.getValue() );
+						}
+					},
 					{
 						id: 'alttext',
 						type: 'text',
@@ -40,28 +51,6 @@ CKEDITOR.dialog.add('flex-picture', function (editor) {
 						commit: function (widget) {
 							widget.setData('linktarget', this.getValue());
 						}
-					},
-					{
-						id: 'picsource',
-						type: 'text',
-						label: 'Picture source',
-						setup: function (widget) {
-							this.setValue( widget.data.picsource );
-						},
-						commit: function (widget) {
-							widget.setData( 'picsource', this.getValue() );
-						}
-					}
-					, {
-						type: 'button',
-						id: 'browse',
-						label: editor.lang.common.browseServer,
-						hidden: false,
-						filebrowser: 'info:picsource',
-						setup: function (widget) {
-						},
-						commit: function (widget) {
-						}
 					}
 
 				]
@@ -75,10 +64,10 @@ CKEDITOR.dialog.add('flex-picture', function (editor) {
 						type: 'select',
 						label: 'Layout',
 						items: [
-							['Inline Block', 'flex-picture-show-inline-block'],
-							['Block', 'flex-picture-show-block'],
-							['Float on right', 'flex-picture-float-on-right'],
-							['Float on left', 'flex-picture-float-on-left']
+							['Inline Block', 'template-replacement-show-inline-block'],
+							['Block', 'template-replacement-show-block'],
+							['Float on right', 'template-replacement-float-on-right'],
+							['Float on left', 'template-replacement-float-on-left']
 						],
 						setup: function (widget) {
 							this.setValue(widget.data.layout);
@@ -199,45 +188,6 @@ CKEDITOR.dialog.add('flex-picture', function (editor) {
 							widget.setData('aspectratio', this.getValue());
 						}
 					}
-					, {
-						id: 'scaling',
-						type: 'select',
-						label: 'Image scaling',
-						items: [
-							['Auto', ''],
-							['Cover', 'flex-picture-scaling-cover'],
-							['Contain', 'flex-picture-scaling-contain']
-						],
-						setup: function (widget) {
-							this.setValue(widget.data.scaling);
-						},
-						commit: function (widget) {
-							widget.setData('scaling', this.getValue());
-						}
-					},
-					{
-						id: 'align',
-						type: 'select',
-						label: 'Image Position',
-						items: [
-							
-							['left top', 'left top'],
-							['left center', 'left center'],
-							['left bottom', 'left bottom'],
-							['right top', 'right top'],
-							['right center', 'right center'],
-							['right bottom', 'right bottom'],
-							['center top', 'center top'],
-							['center center', 'center center'],
-							['center bottom', 'center bottom']
-						],
-						setup: function (widget) {
-							this.setValue(widget.data.align);
-						},
-						commit: function (widget) {
-							widget.setData('align', this.getValue());
-						}
-					}
 				]
 			}
 			, {
@@ -343,28 +293,6 @@ CKEDITOR.dialog.add('flex-picture', function (editor) {
 
 				]
 			}
-			,
-			{
-				id: "Upload", hidden: !0, 
-				filebrowser: "uploadButton", 
-				label: 'Upload', 
-				elements: [
-					{ 
-						type: "file", 
-						id: "upload", 
-						label: 'File upload', 
-						style: "height:40px", 
-						size: 38 
-					}
-					, {
-						type: "fileButton", 
-						id: "uploadButton", 
-						filebrowser: "info:picsource", 
-						label: "Send it",
-						"for": ["Upload", "upload"]
-					}
-				]
-			},
 		]
 	};
 });
